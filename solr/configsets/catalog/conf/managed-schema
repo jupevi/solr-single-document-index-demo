@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema name="default-config" version="1.6">
+  <uniqueKey>id</uniqueKey>
+  <fieldType name="nest_path" class="solr.NestPathField" />
+  <fieldType name="plong" class="solr.LongPointField" docValues="true" useDocValuesAsStored="false" />
+  <fieldType name="string" class="solr.StrField" sortMissingLast="true" docValues="true" useDocValuesAsStored="false" />
+  <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
+     or Solr won't start. _version_ and update log are required for SolrCloud
+  -->
+  <!-- doc values are enabled by default for primitive types such as long so we don't index the version field  -->
+  <field name="_version_" type="plong" indexed="false" stored="false" />
+  <!-- points to the root document of a block of nested documents. Required for nested
+     document support, may be removed otherwise
+  -->
+  <field name="_root_" type="string" indexed="true" stored="false" />
+  <!-- _nest_path_ is populated by Solr automatically with the path of the document in the hierarchy
+     for non-root documents. This field is optional.
+  -->
+  <field name="_nest_path_" type="nest_path" />
+  <!-- _nest_parent_ is populated by Solr automatically to store the ID of each document’s
+     parent document (if there is one). This field is optional.
+  -->
+  <field name="_nest_parent_" type="string" indexed="true" stored="true" />
+  <field name="id" type="string" indexed="true" required="true" stored="true" />
+  <field name="docType" type="string" indexed="false" stored="true" />
+  <field name="name" type="string" indexed="true" stored="true" />
+</schema>
