@@ -1,0 +1,7 @@
+{
+    "require": {
+        "php": "^7.4",
+        "solarium/solarium": "6.1.5",
+        "symfony/event-dispatcher": "^5.4"
+    }
+}
